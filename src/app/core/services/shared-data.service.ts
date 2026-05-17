@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Usuario {
   idUsuario: number;
@@ -28,7 +29,7 @@ export interface Transacao {
 @Injectable({ providedIn: 'root' })
 export class SharedDataService {
 
-  private readonly API_BASE = 'http://localhost:8086/api';
+  private readonly API_BASE = `${environment.apiUrl}/api`;
 
   // Dados reativos — qualquer componente pode se inscrever
   private contaSubject = new BehaviorSubject<Conta | null>(null);

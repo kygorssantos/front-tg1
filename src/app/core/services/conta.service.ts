@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ContaService {
-  private apiUrl = 'http://localhost:8086/api/contas';
+
+  private apiUrl = `${environment.apiUrl}/api/contas`;
 
   // O "Subject" que vai segurar os dados da conta ativa
   private contaAtivaSubject = new BehaviorSubject<any | null>(null);

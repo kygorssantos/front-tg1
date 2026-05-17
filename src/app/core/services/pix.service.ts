@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PixService {
-  private readonly API_CHAVES = 'http://localhost:8086/api/chaves-pix';
-  private readonly API_OPERACAO = 'http://localhost:8086/api/pix'; // ✅ Rota do PixController
+
+ private readonly API_CHAVES = `${environment.apiUrl}/api/chaves-pix`;
+ private readonly API_OPERACAO = `${environment.apiUrl}/api/pix`;
+
+
+
 
   constructor(private http: HttpClient) {}
 

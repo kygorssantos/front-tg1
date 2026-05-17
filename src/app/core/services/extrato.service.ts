@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 // Interfaces sincronizadas com o seu ExtratoResponseDto e ExtratoDto do Java
 export interface ExtratoDto {
@@ -26,7 +27,7 @@ export interface ExtratoResponse {
 export class ExtratoService {
 
   // Caminho base para o seu novo Controller de Extrato
-  private readonly API = 'http://localhost:8086/api/extrato';
+  private readonly API = `${environment.apiUrl}/api/extrato`;
 
   constructor(private http: HttpClient) {}
 

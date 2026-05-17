@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 // Interface do Usuário alinhada com o seu projeto Bizi Banco
 export interface User {
@@ -14,7 +15,8 @@ export interface User {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8086/api/auth';
+
+  private apiUrl = `${environment.apiUrl}/api/auth`;
 
   // Subject que mantém o estado do usuário na memória da aplicação
   private currentUserSubject = new BehaviorSubject<User | null>(null);

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ContaService } from './conta.service';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../../environments/environment';
 
 export interface Transferencia {
   id?: number;
@@ -21,7 +22,8 @@ export interface Transferencia {
   providedIn: 'root'
 })
 export class TransferenciaService {
-  private apiUrl = 'http://localhost:8086/api/transferencias';
+
+  private apiUrl = `${environment.apiUrl}/api/transferencias`;
 
   constructor(
     private http: HttpClient,

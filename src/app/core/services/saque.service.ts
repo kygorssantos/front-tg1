@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Saque {
   id?: number;
@@ -15,7 +16,8 @@ export interface Saque {
   providedIn: 'root'
 })
 export class SaqueService {
-  private apiUrl = 'http://localhost:8086/api/saques';
+
+  private apiUrl = `${environment.apiUrl}/api/saques`;
 
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 /**
  * Interface para tipar a resposta do Backend (Opcional, mas resolve erros de 'any')
@@ -15,7 +16,8 @@ export interface TokenResponse {
 export class LoginService {
 
   // URL base do seu backend Spring Boot (ajuste a porta se necessário)
-  private readonly API = 'http://localhost:8086/api/auth';
+
+  private readonly API = `${environment.apiUrl}/api/auth`;
 
   constructor(private http: HttpClient) { }
 
