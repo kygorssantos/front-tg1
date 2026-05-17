@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VisibilidadeValoresService } from '../../core/services/visibilidade-valores.service';
+import { environment } from '../../environments/environment';
 
 // --- Interfaces ---
 interface Usuario {
@@ -68,7 +69,8 @@ export class DashboardComponent implements OnInit {
   msgSucesso = '';
   msgErro = '';
 
-  private readonly API_BASE = 'http://localhost:8086/api';
+
+  private readonly API_BASE = `${environment.apiUrl}/api`;
 
 constructor(
   private http: HttpClient,
@@ -158,7 +160,7 @@ private buscarExtrato() {
       this.extrato = {
         titular: this.conta?.usuario?.nomeCompleto || 'Usuário Bizi',
         saldoAtual: this.conta?.saldo || 0,
-        transacoes: [...transacoesFormatadas] 
+        transacoes: [...transacoesFormatadas]
       };
       this.calcularResumoMensal(this.extrato.transacoes);
 

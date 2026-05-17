@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthService, User } from '../../core/services/auth.service';
 import { VisibilidadeValoresService } from '../../core/services/visibilidade-valores.service';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-transferencia',
   standalone: true,
@@ -32,7 +33,9 @@ export class TransferenciaComponent implements OnInit {
     valor: null as number | null
   };
 
-  private readonly API_BASE = 'http://localhost:8086/api';
+
+  private readonly API_BASE = `${environment.apiUrl}/api`;
+
 
   constructor(
   private http: HttpClient,
