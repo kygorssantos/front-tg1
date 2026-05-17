@@ -227,7 +227,7 @@ export class SignInComponent implements OnInit {
     formData.append('comprovante', this.arquivos.comprovante!);
 
     // NÃO setar Content-Type manualmente — o HttpClient gera o boundary correto automaticamente
-    this.http.post('${environment.apiUrl}/api/onboarding/proposta', formData).subscribe({
+    this.http.post(`${environment.apiUrl}/api/onboarding/proposta`, formData).subscribe({
       next: () => this.router.navigate(['/login']),
       error: (err) => {
         this.mensagem = err?.error?.message || 'Erro ao criar conta. Tente novamente.';
