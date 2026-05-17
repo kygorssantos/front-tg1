@@ -1,0 +1,164 @@
+<!-- Main Content -->
+<main class="db-main">
+
+  <!-- Hero Balance -->
+  <div class="db-hero">
+    <div>
+      <p class="db-balance-label">
+  Saldo disponível para Pix
+
+  <button
+    type="button"
+    class="btn-eye"
+    (click)="visibilidadeValores.alternar()"
+    [attr.aria-label]="visibilidadeValores.mostrarValores ? 'Ocultar valores' : 'Mostrar valores'">
+
+    <svg *ngIf="visibilidadeValores.mostrarValores" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+
+    <svg *ngIf="!visibilidadeValores.mostrarValores" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C5 20 1 12 1 12a21.77 21.77 0 0 1 5.06-5.94"/>
+      <path d="M9.9 4.24A10.8 10.8 0 0 1 12 4c7 0 11 8 11 8a21.96 21.96 0 0 1-3.17 4.13"/>
+      <path d="M14.12 14.12A3 3 0 0 1 9.88 9.88"/>
+      <path d="M1 1l22 22"/>
+    </svg>
+  </button>
+</p>
+
+<h1 class="db-balance-val">
+  {{ visibilidadeValores.mostrarValores && conta?.saldo != null
+    ? (conta!.saldo | currency:'BRL':'symbol':'1.2-2')
+    : 'R$ •••••' }}
+</h1>
+      <div class="db-acct-info" *ngIf="conta">
+        <span>Ag. {{ conta.numeroAgencia }}</span>
+        <span class="db-acct-sep">·</span>
+        <span>Cc. {{ conta.numeroConta }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA UNIFICADA PIX -->
+  <div class="pix-main-container">
+
+    <!-- 1. FORMULÁRIO DE ENVIO -->
+    <section class="pix-card">
+      <div class="pix-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+        Enviar Novo Pix
+      </div>
+
+      <div class="pix-form-row">
+        <div class="pix-input-group">
+          <label>Chave Pix do Destinatário</label>
+          <input type="text" [(ngModel)]="chavePix" placeholder="CPF, e-mail ou telefone">
+        </div>
+
+        <div class="pix-input-group">
+          <label>Valor (R$)</label>
+          <input type="number" [(ngModel)]="valorPix" placeholder="0,00">
+        </div>
+      </div>
+
+      <button class="btn-bizi-primary" (click)="executarTransferencia()" [disabled]="loading">
+        {{ loading ? 'Processando...' : 'Confirmar envio' }}
+      </button>
+    </section>
+
+    <!-- 2. GERENCIAMENTO DE CHAVES -->
+    <section class="pix-card">
+      <div class="pix-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3"></path>
+          <circle cx="7.5" cy="15.5" r="0.5" fill="currentColor"></circle>
+        </svg>
+        Minhas Chaves Pix
+      </div>
+
+      <!-- Cadastro Rápido de Chave -->
+      <div class="new-key-box">
+        <p class="new-key-box-title">Cadastrar Nova Chave</p>
+
+        <div class="pix-form-row">
+          <div class="pix-input-group">
+            <label>Tipo</label>
+            <select [(ngModel)]="novaChave.tipo">
+              <option value="CPF">CPF</option>
+              <option value="EMAIL">E-mail</option>
+              <option value="TELEFONE">Telefone</option>
+              <option value="ALEATORIA">Chave Aleatória</option>
+            </select>
+          </div>
+
+          <div class="pix-input-group">
+            <label>Dados da Chave</label>
+            <input type="text" [(ngModel)]="novaChave.valor" placeholder="Insira o dado da chave">
+          </div>
+        </div>
+
+        <button class="btn-bizi-slate-save" (click)="salvarNovaChave()">
+          Salvar Chave
+        </button>
+      </div>
+
+      <!-- Listagem de Chaves -->
+      <div class="key-list-container">
+        <div *ngFor="let item of listaChaves" class="key-item-row">
+          <div class="key-info">
+            <span class="key-badge">{{ formatarTipoChave(item.tipoChave) }}</span>
+            <p class="key-value">{{ item.chave }}</p>
+          </div>
+
+          <button class="btn-delete-action" (click)="removerChave(item.id)">
+            Excluir
+          </button>
+        </div>
+
+        <div *ngIf="listaChaves.length === 0" class="key-empty">
+          Você ainda não possui chaves cadastradas.
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. HISTÓRICO RECENTE -->
+    <section class="pix-card">
+      <div class="pix-title">Histórico Recente</div>
+
+      <div *ngIf="loadingExtrato" class="history-loading">
+        Carregando histórico...
+      </div>
+
+      <div class="db-tx-list" *ngIf="!loadingExtrato">
+        <div *ngFor="let tx of extrato?.transacoes | slice:0:5" class="history-item">
+          <!-- Seu código de exibição da transação aqui -->
+        </div>
+
+        <div class="history-action">
+          <button class="btn-bizi-slate" routerLink="/extrato">
+            Ver Extrato Completo →
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="db-footer">
+  <div class="db-footer-brand">
+    <strong>Bizi Bank</strong>
+    <small>© 2026 Bizi Bank. Instituição Financeira Digital.</small>
+  </div>
+
+  <div class="db-footer-col">
+    <span>Conformidade</span>
+    <a href="#">Ética e Transparência</a>
+    <a href="#">Políticas de Privacidade</a>
+  </div>
+</footer>

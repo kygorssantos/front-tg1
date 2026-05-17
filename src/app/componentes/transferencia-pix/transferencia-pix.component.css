@@ -1,0 +1,463 @@
+.db-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Hero */
+.db-hero {
+  background: #fff;
+  border: 1px solid #e2e4e9;
+  border-radius: 20px;
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp .4s ease both;
+}
+
+.db-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #d1fae5 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.db-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 30%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e0f2fe 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.db-balance-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #8b93a5;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.db-balance-val {
+  font-family: 'Instrument Serif', serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: #0f1117;
+  line-height: 1;
+  letter-spacing: -1px;
+  margin: 0 0 14px;
+}
+
+.db-acct-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #8b93a5;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .03em;
+}
+
+.db-acct-sep {
+  color: #d1d5db;
+}
+
+/* Container */
+.pix-main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeUp .4s ease .07s both;
+}
+
+/* Cards */
+.pix-card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e2e4e9;
+  border-radius: 20px;
+  padding: 28px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+
+.pix-card:hover {
+  box-shadow: 0 8px 24px rgba(15, 17, 23, .05);
+}
+
+.pix-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #0f1117;
+  letter-spacing: -.3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #f1f2f5;
+}
+
+.pix-title svg {
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+/* Formulário */
+.pix-form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pix-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.pix-input-group label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #8b93a5;
+}
+
+.pix-input-group input,
+.pix-input-group select {
+  width: 100%;
+  max-width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #e2e4e9;
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  color: #0f1117;
+  background: #fafbfc;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  -webkit-appearance: none;
+}
+
+.pix-input-group input:focus,
+.pix-input-group select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+  background: #fff;
+}
+
+.pix-input-group input::placeholder {
+  color: #c0c4ce;
+}
+
+/* Botões */
+.btn-bizi-primary {
+  width: 100%;
+  padding: 13px 20px;
+  background: #0f1117;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.btn-bizi-primary:hover:not(:disabled) {
+  background: #1e2230;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 17, 23, .18);
+}
+
+.btn-bizi-primary:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-bizi-slate-save {
+  width: 100%;
+  padding: 11px 20px;
+  background: #0f1117;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.btn-bizi-slate-save:hover {
+  background: #1e2230;
+  transform: translateY(-1px);
+}
+
+.btn-bizi-slate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 24px;
+  background: #fff;
+  border: 1px solid #e2e4e9;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all .15s;
+  letter-spacing: .02em;
+}
+
+.btn-bizi-slate:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+/* Cadastro de chave */
+.new-key-box {
+  background: #fafbfc;
+  border: 1.5px dashed #dce4ec;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 22px;
+}
+
+.new-key-box-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.new-key-box-title::before {
+  content: '+';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0f1117;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Lista de chaves */
+.key-list-container {
+  width: 100%;
+}
+
+.key-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f2f5;
+}
+
+.key-item-row:last-child {
+  border-bottom: none;
+}
+
+.key-info {
+  min-width: 0;
+}
+
+.key-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 2px 9px;
+  border-radius: 100px;
+  margin-bottom: 5px;
+}
+
+.key-value {
+  margin: 5px 0 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #374151;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.btn-delete-action {
+  background: #fff5f5;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+
+.btn-delete-action:hover {
+  background: #fee2e2;
+  border-color: #f87171;
+}
+
+.key-empty {
+  text-align: center;
+  padding: 28px 20px;
+  background: #fafbfc;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #8b93a5;
+}
+
+/* Histórico */
+.history-loading {
+  text-align: center;
+  padding: 20px;
+  color: #8b93a5;
+}
+
+.db-tx-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-item {
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  border-radius: 0;
+  padding: 14px 0;
+}
+
+.history-action {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Footer */
+.db-footer {
+  margin-top: 24px;
+}
+
+/* Animação */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .db-main {
+    gap: 18px;
+  }
+
+  .db-hero {
+    padding: 28px 24px;
+  }
+
+  .db-balance-val {
+    font-size: 40px;
+  }
+
+  .pix-card {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .pix-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .key-item-row {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .db-hero {
+    padding: 24px 20px;
+  }
+
+  .db-balance-val {
+    font-size: 34px;
+  }
+
+  .pix-title {
+    font-size: 18px;
+  }
+
+  .key-item-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-delete-action {
+    width: 100%;
+  }
+}
+
+.btn-eye {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e2e4e9;
+  border-radius: 50%;
+  background: #fff;
+  color: #8b93a5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.btn-eye:hover {
+  color: #2563eb;
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
