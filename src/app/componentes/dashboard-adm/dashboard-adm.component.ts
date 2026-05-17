@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 interface Proposta {
   id: number;
@@ -50,9 +51,15 @@ export class DashboardAdmComponent implements OnInit {
 
   imagemAmpliada: string | null = null;
 
-  private readonly API_BASE = 'http://localhost:8086/api';
+
+
+
+  private readonly API_BASE = `${environment.apiUrl}/api`;
+
+
   // URL base onde os arquivos de documentos estão servidos pelo backend
-  private readonly DOCS_BASE = 'http://localhost:8086';
+
+  private readonly DOCS_BASE = environment.apiUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
 
